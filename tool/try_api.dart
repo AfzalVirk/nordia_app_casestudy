@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'package:hydatis_app/sync/task_api.dart';
 import 'package:uuid/uuid.dart';
 
