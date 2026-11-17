@@ -43,15 +43,11 @@ class PickMemberScreen extends StatelessWidget {
             return CustomScrollView(
               slivers: [
                 // ── Hero header ──
-                SliverToBoxAdapter(
-                  child: _Header(cs: cs),
-                ),
+                SliverToBoxAdapter(child: _Header(cs: cs)),
 
                 // ── Members or empty state ──
                 if (members.isEmpty)
-                  SliverFillRemaining(
-                    child: _EmptyState(app: app),
-                  )
+                  SliverFillRemaining(child: _EmptyState(app: app))
                 else
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 32),
@@ -125,10 +121,7 @@ class _Header extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Choose your profile to get started',
-            style: TextStyle(
-              color: Colors.white.withAlpha(200),
-              fontSize: 15,
-            ),
+            style: TextStyle(color: Colors.white.withAlpha(200), fontSize: 15),
           ),
         ],
       ),
@@ -256,8 +249,7 @@ class _MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final avatarColor = _avatarColor(member.name);
-    final initial =
-        member.name.isNotEmpty ? member.name[0].toUpperCase() : '?';
+    final initial = member.name.isNotEmpty ? member.name[0].toUpperCase() : '?';
 
     return Material(
       color: Colors.white,
@@ -284,10 +276,7 @@ class _MemberCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      avatarColor,
-                      avatarColor.withAlpha(180),
-                    ],
+                    colors: [avatarColor, avatarColor.withAlpha(180)],
                   ),
                   shape: BoxShape.circle,
                   boxShadow: [
@@ -310,15 +299,41 @@ class _MemberCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              // Name
+              // Name & ID
               Expanded(
-                child: Text(
-                  member.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF1A1A2E),
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      member.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF1A1A2E),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF0F4F8),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        member.id,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blueGrey.shade700,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               // Arrow
